@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,9 +24,9 @@ jobs:
       - name: Build package
         run: python -m build
 
-      - name: Create GitHub release
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: dist/*  # Alle Dateien im dist/ Ordner hochladen
+          files: dist/*
         env:
-          GITHUB_TOKEN: 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  # Dein Token hier verwenden
+          GITHUB_TOKEN: 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  # Dein Personal Access Token hier verwenden
