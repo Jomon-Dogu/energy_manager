@@ -29,4 +29,4 @@ jobs:
         with:
           files: dist/*  # Alle Dateien im dist/ Ordner hochladen
         env:
-          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}  # Dein Token hier verwenden
+          GITHUB_TOKEN: ${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}  # Dein Token hier verwenden
