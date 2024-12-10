@@ -1,1 +1,1 @@
-include src/*.py
+include energy_manager/*.py
