@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "energy_manager"
+version = "0.0.1"
+description = "Dieses Projekt zielt darauf ab, die CPU-Frequenz basierend auf verschiedenen Systemmetriken wie CPU-Auslastung, 
+                Speichernutzung, Festplattennutzung, Netzwerkstatistiken und Temperatur vorherzusagen. Das System besteht aus drei Hauptskripten,
+                die zusammenarbeiten, um die Daten zu sammeln, ein neuronales Netz zu trainieren und schließlich die CPU-Frequenz vorherzusagen."
+authors = [
+    { name = "Hannelore Klein" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+
+
+dependencies = [
+    "requirements", 
+]
+
+[tool.setuptools]
+packages = ["energy_manager"]            
+include-package-data = true             # Inkludiere zusätzliche Daten (z. B. aus `MANIFEST.in`)

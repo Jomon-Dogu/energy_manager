@@ -1,0 +1,6 @@
+tensorflow>=2.0
+psutil
+numpy
+pandas
+scikit-learn
+joblib
