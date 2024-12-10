@@ -15,13 +15,13 @@ def predict_cpu_frequency():
 
     # Modell laden
     print("📦 Lade Modell...")
-    model = load_model('cpu_freq_predictor.keras')
+    model = load_model('energy_manager/cpu_freq_predictor.keras')
     print("✅ Modell erfolgreich geladen.")
 
     # Scaler laden
     print("📦 Lade Scaler (X und y)...")
-    scaler_X = joblib.load("scaler_X.pkl")
-    scaler_y = joblib.load("scaler_y.pkl")
+    scaler_X = joblib.load("energy_manager/scaler_X.pkl")
+    scaler_y = joblib.load("energy_manager/scaler_y.pkl")
     print("✅ Scaler erfolgreich geladen.")
 
     # Aktuelle Systemmetriken erfassen mit psutil

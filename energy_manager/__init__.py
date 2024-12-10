@@ -1,2 +1,3 @@
-from predictor import predict_cpu_frequency
-from read_system_data import read_cpu_usage, read_loadavg, read_cpu_freq, read_cpu_temperature, read_memory_stats, read_disk_stats, read_network_stats, collect_data
+from energy_manager.predictor import predict_cpu_frequency
+from energy_manager.read_system_data import read_cpu_usage, read_loadavg, read_cpu_freq, read_cpu_temperature, read_memory_stats, read_disk_stats, read_network_stats, collect_data
+from energy_manager.train_model import train_model
