@@ -17,9 +17,9 @@ def train_model():
     # Fehlerbehandlung für das Laden der Daten
     try:
         # Lade die gesammelten Daten
-        data = pd.read_csv("system_data.csv")
+        data = pd.read_csv("energy_manager/system_data.csv")
     except FileNotFoundError:
-        print("Fehler: 'system_data.csv' nicht gefunden!")
+        print("Fehler: 'energy_manager/system_data.csv' nicht gefunden!")
         return
     except pd.errors.EmptyDataError:
         print("Fehler: Die CSV-Datei ist leer!")
