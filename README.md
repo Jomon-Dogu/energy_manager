@@ -126,3 +126,8 @@ python predictor.py
 | `cpu_freq_predictor.keras` | Gespeichertes neuronales Netzmodell (automatisch generiert). |
 | `scaler_X.pkl`     | Scaler für Eingabedaten (automatisch generiert).    |
 | `scaler_y.pkl`     | Scaler für Zielvariable (CPU-Frequenz) (automatisch generiert). |
+
+
+## **Installation via pip**
+
+pip install https://github.com/Jomon-Dogu/energy_manager/releases/download/v0.0.1/energy_manager-0.0.1-py3-none-any.whl

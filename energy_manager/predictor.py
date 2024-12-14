@@ -15,14 +15,33 @@ def predict_cpu_frequency():
 
     # Modell laden
     print("📦 Lade Modell...")
-    model = load_model('energy_manager/cpu_freq_predictor.keras')
+    model = load_model('cpu_freq_predictor.keras')
     print("✅ Modell erfolgreich geladen.")
 
+    
     # Scaler laden
     print("📦 Lade Scaler (X und y)...")
-    scaler_X = joblib.load("energy_manager/scaler_X.pkl")
-    scaler_y = joblib.load("energy_manager/scaler_y.pkl")
+    scaler_X = joblib.load("scaler_X.pkl")
+    scaler_y = joblib.load("scaler_y.pkl")
     print("✅ Scaler erfolgreich geladen.")
+    
+    import os
+
+    # Liste der zu löschenden Dateien
+    files_to_delete = ['scaler_X.pkl', 'scaler_y.pkl', 'cpu_freq_predictor.keras']
+
+    # Schleife durch die Liste und lösche jede Datei
+    for file_path in files_to_delete:
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            print(f"✅ Datei '{file_path}' wurde erfolgreich gelöscht.")
+        else:
+            print(f"⚠️ Datei '{file_path}' existiert nicht.")
+
+
+    # 🛠️ Debug: Überprüfe den Scaler
+    print(f"🔍 Skalierungsfaktoren (scale_) für y: {scaler_y.scale_}")
+    
 
     # Aktuelle Systemmetriken erfassen mit psutil
     system_metrics = {
@@ -35,19 +54,23 @@ def predict_cpu_frequency():
         'cpu_temp': psutil.sensors_temperatures()['coretemp'][0].current,
         'mem_total': psutil.virtual_memory().total,  # Total RAM in bytes
         'mem_free': psutil.virtual_memory().available,  # Available RAM in bytes
+        'mem_used_pct' : psutil.virtual_memory().percent,
         'swap_total': psutil.swap_memory().total,  # Total swap memory in bytes
         'swap_free': psutil.swap_memory().free,  # Free swap memory in bytes
+        'swap_used_pct' : psutil.swap_memory().percent,
         'disk_read': psutil.disk_io_counters().read_bytes,  # Total disk read in bytes
         'disk_write': psutil.disk_io_counters().write_bytes,  # Total disk write in bytes
         'network_rx': psutil.net_io_counters().bytes_recv,  # Total received bytes
         'network_tx': psutil.net_io_counters().bytes_sent  # Total sent bytes
     }
 
+
     print("::::::::::::::::::::::::::::::::::::::::::", system_metrics)
     print("::::::::::::::::::::::::::::::::::::::::::", psutil.cpu_freq().current)  # in Mhz
 
     # Eingabedaten formatieren (Systemmetriken)
     input_data = np.array(list(system_metrics.values())).reshape(1, -1)
+
 
     print(f"🧮 Eingabedaten vor Skalierung: {input_data}")
 
@@ -66,10 +89,8 @@ def predict_cpu_frequency():
     # Rückskalierung der Vorhersage
     predicted_cpu_frequency = scaler_y.inverse_transform(scaled_prediction.reshape(-1, 1))
 
-    # Sicherstellen, dass die Vorhersage nicht negativ ist
-    if predicted_cpu_frequency[0][0] < 0:
-        print(f"⚠️ Ungewöhnlich niedrige Vorhersage: {predicted_cpu_frequency[0][0]} MHz. Setze auf minimalen Wert.")
-        predicted_cpu_frequency[0][0] = 0  # Oder setze einen anderen minimalen Wert, der sinnvoll erscheint
+    # Setze negative Frequenzen auf 0 (physikalisch nicht möglich)
+    predicted_cpu_frequency = np.maximum(predicted_cpu_frequency, 0)
 
     # Rückskalierte Vorhersage ausgeben
     print(f"🎉 Rückskalierte Vorhersage: {predicted_cpu_frequency[0][0]} MHz")
