@@ -19,7 +19,7 @@ Dieses Projekt zielt darauf ab, die CPU-Frequenz basierend auf verschiedenen Sys
 ##  **Funktionen der Skripte**
 
 ### 1️ **read_system_data.py**
-    Dieses Skript sammelt Systemmetriken und speichert sie in der Datei `system_data.csv`.
+Dieses Skript sammelt Systemmetriken und speichert sie in der Datei `system_data.csv`.
 
 - **Gesammelte Metriken**:
   - CPU-Auslastung (User, System, Idle)
