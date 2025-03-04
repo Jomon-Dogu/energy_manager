@@ -1,38 +1,24 @@
 
-# 📘 CPU Frequency Prediction System
+#  CPU Frequency Prediction System
 
-## 📋 **Inhaltsverzeichnis**
+##  **Inhaltsverzeichnis**
 1. [Projektübersicht](#projektübersicht)
-2. [Dateistruktur](#dateistruktur)
-3. [Funktionen der Skripte](#funktionen-der-skripte)
-4. [Installation](#installation)
-5. [Verwendung](#verwendung)
-6. [Technologien](#technologien)
-7. [Dateibeschreibung](#dateibeschreibung)
+2. [Funktionen der Skripte](#funktionen-der-skripte)
+3. [Installation](#installation)
+4. [Verwendung](#verwendung)
+5. [Technologien](#technologien)
+6. [Dateibeschreibung](#dateibeschreibung)
 
 ---
 
-## 🧑‍💻 **Projektübersicht**
+##  **Projektübersicht**
 Dieses Projekt zielt darauf ab, die CPU-Frequenz basierend auf verschiedenen Systemmetriken wie CPU-Auslastung, Speichernutzung, Festplattennutzung, Netzwerkstatistiken und Temperatur vorherzusagen. Das System besteht aus drei Hauptskripten, die zusammenarbeiten, um die Daten zu sammeln, ein neuronales Netz zu trainieren und schließlich die CPU-Frequenz vorherzusagen.
 
 ---
 
-## 📁 **Dateistruktur**
-```
-├── predictor.py             # Führt die Vorhersage der CPU-Frequenz durch
-├── read_system_data.py      # Sammelt Systemmetriken und speichert sie in einer CSV-Datei
-├── train_model.py           # Trainiert ein neuronales Netz mit den gesammelten Daten
-├── system_data.csv          # CSV-Datei mit den gesammelten Systemmetriken (automatisch erstellt)
-├── cpu_freq_predictor.keras # Das trainierte Modell (automatisch erstellt)
-├── scaler_X.pkl             # Scaler für die Eingabedaten (automatisch erstellt)
-├── scaler_y.pkl             # Scaler für die Zielvariable (automatisch erstellt)
-```
+##  **Funktionen der Skripte**
 
----
-
-## ⚙️ **Funktionen der Skripte**
-
-### 1️⃣ **read_system_data.py**
+### 1️ **read_system_data.py**
 Dieses Skript sammelt Systemmetriken und speichert sie in der Datei `system_data.csv`.
 
 - **Gesammelte Metriken**:
@@ -48,7 +34,7 @@ Dieses Skript sammelt Systemmetriken und speichert sie in der Datei `system_data
   - Die Daten werden als Zeilen in der Datei `system_data.csv` gespeichert.
   - Das Skript läuft für eine bestimmte `duration` (standardmäßig 1 Stunde).
 
-### 2️⃣ **train_model.py**
+###  **train_model.py**
 Das Training des neuronalen Netzes erfolgt mit den gesammelten Systemmetriken.
 
 - **Schritte**:
@@ -59,7 +45,7 @@ Das Training des neuronalen Netzes erfolgt mit den gesammelten Systemmetriken.
   5. **Speichern**: Speichert das trainierte Modell als `cpu_freq_predictor.keras`, sowie die Scaler `scaler_X.pkl` und `scaler_y.pkl`.
   6. **Validierung**: Führt Vorhersagen auf den Testdaten durch und zeigt die Ergebnisse an.
 
-### 3️⃣ **predictor.py**
+### **predictor.py**
 Führt eine Echtzeitvorhersage der CPU-Frequenz auf Basis der aktuellen Systemmetriken durch.
 
 - **Schritte**:
@@ -70,7 +56,7 @@ Führt eine Echtzeitvorhersage der CPU-Frequenz auf Basis der aktuellen Systemme
 
 ---
 
-## 🛠️ **Installation**
+##  **Installation**
 1. **Python-Pakete installieren**:
    ```bash
    pip install -r requirements.txt
@@ -84,7 +70,7 @@ Führt eine Echtzeitvorhersage der CPU-Frequenz auf Basis der aktuellen Systemme
 
 ---
 
-## 🚀 **Verwendung**
+## **Verwendung**
 
 ### 🔍 **1. Systemmetriken sammeln**
 Führe das Skript `read_system_data.py` aus, um Systemmetriken in der Datei `system_data.csv` zu sammeln.
@@ -92,13 +78,13 @@ Führe das Skript `read_system_data.py` aus, um Systemmetriken in der Datei `sys
 python read_system_data.py
 ```
 
-### 📘 **2. Modell trainieren**
+###  **2. Modell trainieren**
 Führe das Trainingsskript aus, um das Modell zu trainieren:
 ```bash
 python train_model.py
 ```
 
-### 🤖 **3. Vorhersage der CPU-Frequenz**
+###  **3. Vorhersage der CPU-Frequenz**
 Führe das Vorhersage-Skript aus:
 ```bash
 python predictor.py
@@ -106,7 +92,7 @@ python predictor.py
 
 ---
 
-## 📚 **Technologien**
+##  **Technologien**
 - **Programmiersprache**: Python
 - **Bibliotheken**:
   - `TensorFlow`: Aufbau des neuronalen Netzes.
@@ -116,13 +102,23 @@ python predictor.py
 
 ---
 
-## 📄 **Dateibeschreibung**
+##  **Dateibeschreibung**
 | **Datei**          | **Beschreibung**                                   |
 |-------------------|---------------------------------------------------|
-| `predictor.py`     | Führt die Vorhersage der CPU-Frequenz durch.        |
-| `read_system_data.py` | Sammelt und speichert die Systemmetriken in `system_data.csv`. |
-| `train_model.py`   | Trainiert das neuronale Netz und speichert das Modell sowie die Scaler. |
+| `energy_manager/data_cleaner.py`   | Das Skript SystemDataCleaner lädt Systemdaten aus CSV-Datei, filtert CPU-Frequenzwerte außerhalb eines definierten Bereichs und speichert die bereinigten Daten in einer neuen CSV-Datei |
+| `energy_manager/data_gen.py`   | generiert synthetische Daten |
+| `energy_manager/predictor.py`     | Führt die Vorhersage der CPU-Frequenz durch.        |
+| `energy_manager/read_system_data.py` | Sammelt und speichert die Systemmetriken in `system_data.csv`. |
+| `energy_manager/train_model.py`   | Trainiert das neuronale Netz und speichert das Modell sowie die Scaler. |
+| `MANIFEST.in`   | Nötig um externe Daten in Python Paket zu inkludieren |
+| `README.md`   | Readme Datei |
+| `gen_input_data.csv`   | synthetische Daten |
+| `main.py`   | Testskript/Demonstrator |
+| `pyproject.toml`   | Definiert die Eigenschaften des Paketes |
+| `requirements.txt`   | benötigte externe Pakete |
 | `system_data.csv`  | CSV-Datei mit gesammelten Systemmetriken (automatisch generiert). |
+| `system_data_2.csv`   | Kollektion verschiedener Messreihen von ausgelesenen Hardwarewerten |
+| `system_data_cleaned.csv`   | ausgelesene Hardwarewerte, bereinigt mittels energy_manager/data_cleaner.py um patologische Datenwerte |
 | `cpu_freq_predictor.keras` | Gespeichertes neuronales Netzmodell (automatisch generiert). |
 | `scaler_X.pkl`     | Scaler für Eingabedaten (automatisch generiert).    |
 | `scaler_y.pkl`     | Scaler für Zielvariable (CPU-Frequenz) (automatisch generiert). |
